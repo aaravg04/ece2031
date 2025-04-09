@@ -1,0 +1,116 @@
+WIDTH=16;
+DEPTH=2048;
+
+ADDRESS_RADIX=HEX;
+DATA_RADIX=HEX;
+
+CONTENT BEGIN
+0000: 9000; --         IN     Switches
+0001: 1055; --         STORE  Pattern
+0002: 0855; --         LOAD   Pattern
+0003: 485F; --         AND    Bit9
+0004: 380A; --         JPOS   Right         ; if bit9 is 1; go right
+0005: 0855; --         LOAD   Pattern
+0006: 6001; --         SHIFT  1
+0007: 1055; --         STORE  Pattern
+0008: 8017; --         CALL   SetLED        ; Use brightness map corresponding to pattern
+0009: 2802; --         JUMP   Left
+000A: 0855; --         LOAD   Pattern
+000B: 4856; --         AND    Bit0
+000C: 3802; --         JPOS   Left          ; if bit0 is 1; go left
+000D: 0855; --         LOAD   Pattern
+000E: 6011; --         SHIFT  -1
+000F: 1055; --         STORE  Pattern
+0010: 8017; --         CALL   SetLED
+0011: 280A; --         JUMP   Right
+0012: 9802; --         OUT    Timer
+0013: 9002; --         IN     Timer
+0014: 6FFB; --         ADDI   -5
+0015: 3013; --         JNEG   WaitDelay
+0016: 8800; --         RETURN
+0017: 0855; --         LOAD   Pattern
+0018: 4856; --         AND    Bit0
+0019: 3836; --         JPOS   sendB0
+001A: 0855; --         LOAD   Pattern
+001B: 4857; --         AND    Bit1
+001C: 3839; --         JPOS   sendB1
+001D: 0855; --         LOAD   Pattern
+001E: 4858; --         AND    Bit2
+001F: 383C; --         JPOS   sendB2
+0020: 0855; --         LOAD   Pattern
+0021: 4859; --         AND    Bit3
+0022: 383F; --         JPOS   sendB3
+0023: 0855; --         LOAD   Pattern
+0024: 485A; --         AND    Bit4
+0025: 3842; --         JPOS   sendB4
+0026: 0855; --         LOAD   Pattern
+0027: 485B; --         AND    Bit5
+0028: 3845; --         JPOS   sendB5
+0029: 0855; --         LOAD   Pattern
+002A: 485C; --         AND    Bit6
+002B: 3848; --         JPOS   sendB6
+002C: 0855; --         LOAD   Pattern
+002D: 485D; --         AND    Bit7
+002E: 384B; --         JPOS   sendB7
+002F: 0855; --         LOAD   Pattern
+0030: 485E; --         AND    Bit8
+0031: 384E; --         JPOS   sendB8
+0032: 0855; --         LOAD   Pattern
+0033: 485F; --         AND    Bit9
+0034: 3851; --         JPOS   sendB9
+0035: 2854; --         JUMP   EndSetLED
+0036: 0860; --         LOAD   B0
+0037: 9821; --         OUT    LEDs
+0038: 2854; --         JUMP   EndSetLED
+0039: 0861; --         LOAD   B1
+003A: 9821; --         OUT    LEDs
+003B: 2854; --         JUMP   EndSetLED
+003C: 0862; --         LOAD   B2
+003D: 9821; --         OUT    LEDs
+003E: 2854; --         JUMP   EndSetLED
+003F: 0863; --         LOAD   B3
+0040: 9821; --         OUT    LEDs
+0041: 2854; --         JUMP   EndSetLED
+0042: 0864; --         LOAD   B4
+0043: 9821; --         OUT    LEDs
+0044: 2854; --         JUMP   EndSetLED
+0045: 0865; --         LOAD   B5
+0046: 9821; --         OUT    LEDs
+0047: 2854; --         JUMP   EndSetLED
+0048: 0866; --         LOAD   B6
+0049: 9821; --         OUT    LEDs
+004A: 2854; --         JUMP   EndSetLED
+004B: 0867; --         LOAD   B7
+004C: 9821; --         OUT    LEDs
+004D: 2854; --         JUMP   EndSetLED
+004E: 0868; --         LOAD   B8
+004F: 9821; --         OUT    LEDs
+0050: 2854; --         JUMP   EndSetLED
+0051: 0869; --         LOAD   B9
+0052: 9821; --         OUT    LEDs
+0053: 2854; --         JUMP   EndSetLED
+0054: 8800; --         RETURN
+0055: 0000; -- Pattern:   DW 0
+0056: 0001; -- Bit0:      DW &amp;B0000000001
+0057: 0002; -- Bit1:      DW &amp;B0000000010
+0058: 0004; -- Bit2:      DW &amp;B0000000100
+0059: 0008; -- Bit3:      DW &amp;B0000001000
+005A: 0010; -- Bit4:      DW &amp;B0000010000
+005B: 0020; -- Bit5:      DW &amp;B0000100000
+005C: 0040; -- Bit6:      DW &amp;B0001000000
+005D: 0080; -- Bit7:      DW &amp;B0010000000
+005E: 0100; -- Bit8:      DW &amp;B0100000000
+005F: 0200; -- Bit9:      DW &amp;B1000000000
+0060: 0401; -- B0: DW &amp;B0000010000000001
+0061: 0C02; -- B1: DW &amp;B0000110000000010
+0062: 0816; -- B2: DW &amp;B0000100000010110 
+0063: 0828; -- B3: DW &amp;B0000100000101000
+0064: 1018; -- B4: DW &amp;B0001000000011000
+0065: 1068; -- B5: DW &amp;B0001000001101000 
+0066: 2060; -- B6: DW &amp;B0010000001100000
+0067: 2180; -- B7: DW &amp;B0010000110000000 
+0068: 4140; -- B8: DW &amp;B0100000101000000
+0069: 4280; -- B9: DW &amp;B0100001010000000
+[006A..07FF] : 0000; -- [empty memory]
+END;
+
